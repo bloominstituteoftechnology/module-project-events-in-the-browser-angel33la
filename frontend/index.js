@@ -2,7 +2,7 @@
 function moduleProject2() {
   // 👇 WORK WORK BELOW THIS LINE 👇
   let startTime = new Date().getTime() // Record start time
-  
+
   function getTimeElapsed() { // To be used at end of game to get elapsed time
     let currentTime = new Date().getTime()
     return currentTime - startTime
@@ -41,9 +41,9 @@ function moduleProject2() {
           document.querySelector('.targeted').classList.remove('targeted')
           square.classList.add('targeted')
         }
-        })
-      }
+      })
     }
+  }
   document.querySelector('.row:nth-child(3)')
     .children[2].classList.add('targeted') // Initial square being targeted
 
@@ -69,6 +69,38 @@ function moduleProject2() {
 
   document.addEventListener('keydown', evt => {
     // 👉 TASK 3 - Use the arrow keys to highlight a new square 👈
+    console.log(evt.key)
+
+    let isUp = evt.key === keys.up
+    let isDown = evt.key === keys.down
+    let isLeft = evt.key === keys.left
+    let isRight = evt.key === keys.right
+
+    let targeted = document.querySelector('.targeted')
+
+    if (isUp) {
+      if (targeted.parentElement.previousElementSibling) {
+        let idx = Array.from[targeted.parentElement.children].indexOf(targeted)
+        targeted.classList.remove('targeted')
+        targeted.parentElement.previousElementSibling.children[idx].classList.add('targeted')
+      }
+    } else if (isDown) {
+      if (targeted.parentElement.nextElementSibling) {
+        let idx = Array.from[targeted.parentElement.children].indexOf(targeted)
+        targeted.classList.remove('targeted')
+        targeted.parentElement.nextElementSibling.children[idx].classList.add('targeted')
+      }
+    } else if (isLeft) {
+      if (targeted.previousElementSibling) {
+        targeted.classList.remove('targeted')
+        targeted.previousElementSibling.classList.add('targeted')
+      }
+    } else if (isRight) {
+      if (targeted.nextElementSibling) {
+        targeted.classList.remove('targeted')
+        targeted.nextElementSibling.classList.add('targeted')
+      }
+    }
 
     // 👉 TASK 4 - Use the space bar to exterminate a mosquito 👈
 
@@ -80,5 +112,7 @@ function moduleProject2() {
 // ❗ DO NOT MODIFY THE CODE BELOW
 // ❗ DO NOT MODIFY THE CODE BELOW
 // ❗ DO NOT MODIFY THE CODE BELOW
-if (typeof module !== 'undefined' && module.exports) module.exports = { moduleProject2 }
+if (typeof module !== 'undefined' && module.exports) module.exports = {
+  moduleProject2
+}
 else moduleProject2()
